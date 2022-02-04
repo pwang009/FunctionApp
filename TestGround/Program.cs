@@ -10,11 +10,11 @@ namespace TestGround
         static async Task Main(string[] args)
         {
             var product = new Product();
-            var jsonMsg = JsonSerializer.Serialize(product);
-            Console.WriteLine(jsonMsg);
+            var jsonMsg = JsonSerializer.Serialize(new Product());
+            Console.WriteLine($"message in Json: {jsonMsg}");
 
             var msg = JsonSerializer.Deserialize<Product>(jsonMsg);
-            Console.WriteLine(msg);
+            Console.WriteLine(msg.Name);
 
             var str = "Server=tcp:jtn874t9r4.database.windows.net,1433;Initial Catalog=esiteDB;Persist Security Info=False;User ID=pwang009;Password=Kostland2277;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
             using (SqlConnection conn = new SqlConnection(str))
@@ -30,7 +30,8 @@ namespace TestGround
                     try
                     {
                         var rows = await cmd.ExecuteScalarAsync();
-                        Console.WriteLine($"{rows} rows were updated");
+                        //var word = rows > 1 ? "have" : "has";
+                        //Console.WriteLine($"{rows} row {word} been inserted.");
                     }
                     catch (Exception ex)
                     {

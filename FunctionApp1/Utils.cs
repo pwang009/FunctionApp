@@ -34,7 +34,8 @@ namespace FunctionApp1
                     try
                     {
                         var rows = await cmd.ExecuteNonQueryAsync();
-                        log.LogInformation($"{rows} rows were updated");
+                        var words = rows < 2 ? "row has" : "rows have";
+                        log.LogInformation($"{rows} {words} been inserted to database!");
                     }
                     catch (Exception ex)
                     {
